@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book With Us | Decor Dreams</title>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600&display=swap" rel="stylesheet">
+        <style>
+/* Page base */
+body {
+    margin: 0;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #222222;
+    background-color:  #D4AF37;
+}
+
+/* Contact section layout */
+.contact-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 20px 80px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: 60px;
+}
+
+/* Intro / left side */
+.contact-intro h1 {
+    font-size: 40px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 0 0 24px;
+}
+
+.contact-intro h4 {
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 500;
+    margin: 32px 0 10px;
+}
+
+.contact-intro p {
+    margin: 4px 0;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.contact-intro strong {
+    font-weight: 600;
+}
+
+/* Form wrapper / right side */
+.contact-form-wrapper h4 {
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 500;
+    margin: 0 0 12px;
+}
+
+.contact-form-wrapper > p {
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 0 0 24px;
+    color: #555555;
+}
+
+/* Form layout */
+.contact-form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 24px 24px 28px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: #666666;
+}
+
+.form-group input,
+.form-group textarea {
+    font: inherit;
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid #D4AF37;
+    background-color: #fcfbf9;
+    color: #222222;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #D4AF37;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 1px rgba(197, 155, 124, 0.4);
+}
+
+/* Button */
+.btn-primary {
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 12px;
+    padding: 12px 32px;
+    border-radius: 999px;
+    background-color: #c59b7c;
+    color: #ffffff;
+    transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary:hover {
+    background-color: #b38463;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .contact-page {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 40px 10px 60px;
+    }
+}
+        </style>
+</head>
+<body>
+    <div class="contact-page">
+            <div class="contact-intro">
+                <h1>Book With Us</h1>
+                <h4>Free Quote Request</h4>
+                <p>Fill out this form for a Free Quote. Please include your event date, location, inspiration, and budget for a personalized response.</p>
+                <p><strong>We look forward to making your event unforgettable!</strong></p>
+            </div>
+            <div class="contact-form-wrapper">
+                <h4>Request Form</h4>
+                <p>All fields marked with * are required.</p>
+                <form class="contact-form" id="quoteForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name*</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email*</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="event_date">Event Date*</label>
+                            <input type="date" id="event_date" name="event_date" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="location">Event Location*</label>
+                            <input type="text" id="location" name="location" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Estimated Budget (CAD)</label>
+                            <input type="number" id="budget" name="budget" min="0" step="100">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inspiration">Inspiration / Vision*</label>
+                        <textarea id="inspiration" name="inspiration" rows="4" required></textarea>
+                    </div>
+                    <button class="btn-primary" type="submit">Request Free Quote</button>
+                    <div id="form-message" style="margin-top:16px;font-size:14px;"></div>
+                </form>
+            </div>
+        </div>
+</body>
+</body>
+<script>
+// Initialize EmailJS
+emailjs.init('RqkocdvwsC2oV3wn8'); // Replace with your EmailJS public key
+
+document.getElementById('quoteForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = this;
+    const messageDiv = document.getElementById('form-message');
+    messageDiv.textContent = '';
+    emailjs.sendForm('decordreams2025dec', 'template_4raw0yu', form)
+        .then(function() {
+            messageDiv.style.color = 'green';
+            messageDiv.textContent = 'Thank you! Your request has been sent.';
+            form.reset();
+        }, function(error) {
+            messageDiv.style.color = 'red';
+            messageDiv.textContent = 'Sorry, there was an error sending your request.';
+        });
+});
+</script>
+</html>
